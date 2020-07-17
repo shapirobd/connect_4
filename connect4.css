@@ -1,5 +1,8 @@
 /* game board table */
 body {
+	margin: 0 auto;
+	height: 100vh;
+	width: 100vw;
 	background-image: url('https://motionarray.imgix.net/preview-241367-KTZaS2Nu4A-high_0001.jpg');
 	background-size: cover;
 }
@@ -8,61 +11,99 @@ body {
 	display: inline-flex;
 	height: 100%;
 	width: 100%;
-	padding: 10px;
+	position: relative;
+	left: 0px;
 }
-#prev-score {
+#game {
+	position: absolute;
+	left: 0px;
+	background-color: white;
+	width: 60%;
+	height: 100%;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+#score-panel {
+	position: absolute;
+	right: 0px;
+	width: 40%;
+	height: 100%;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+#high-score {
 	background-color: rgba(225, 225, 225, 0.4);
-	border: 3px outset;
-	display: inline-block;
-	width: 30%;
-	right: 110%;
-	margin: 0px;
+	position: relative;
+	display: block;
+	margin: 25px auto;
+	border: 3px solid white;
+	height: 40%;
+	width: 80%;
 	padding: 10px;
 	border-radius: 1em;
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
 	text-align: center;
 }
 
-#game {
-	display: inline-block;
-	background-color: white;
-	border: 3px outset;
-	width: 30%;
-	padding: 10px;
-	margin: 0 1.5%;
-	border-radius: 1em;
-	position: relative;
-	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-}
-
-#current-score {
+#curr-score {
 	background-color: rgba(225, 225, 225, 0.4);
-	border: 3px outset;
-	display: inline-block;
-	width: 30%;
-	right: 110%;
-	margin: 0px;
+	position: relative;
+	display: block;
+	margin: 25px auto;
+	bottom: 10px;
+	border: 3px solid white;
+	height: 40%;
+	width: 80%;
 	padding: 10px;
 	border-radius: 1em;
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+	text-align: center;
 }
 
 h1 {
 	font-size: 30pt;
+	height: fit-content;
 	text-align: center;
 	font-family: 'Hind', sans-serif;
+	margin: 5px 0;
 }
 
 #game h1 {
 	font-size: 50pt;
 	text-align: center;
 	font-family: 'Lobster', cursive;
+	margin: 20px 0px 30px 0px;
 }
 
 h2 {
 	font-family: 'Hind', sans-serif;
 	font-weight: lighter;
 	text-align: center;
+	display: inline-block;
+}
+
+.p1-title {
+	color: rgb(255, 92, 92);
+}
+
+.p2-title {
+	color: rgb(100, 100, 255);
+}
+
+.black-box {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 22px;
+	height: 60%;
+	width: 80%;
+	border-radius: 1em;
+	background-color: rgb(0, 0, 0);
+	border: 8px inset white;
+}
+
+.black-box h2 {
+	margin: 15px 40px;
 }
 
 #board-wrapper {
@@ -71,26 +112,25 @@ h2 {
 	height: fit-content;
 	width: fit-content;
 	border-radius: 1.5em;
+	margin: 0 auto;
+	box-shadow: 5px 5px 3px black;
 }
 
 #board-back {
 	z-index: 1;
 	position: relative;
 	margin: 0 auto;
-	background-color: rgb(155, 155, 155);
+	background-color: rgb(139, 164, 248);
 	border-radius: 1.5em;
-	border: 1px solid rgb(95, 95, 95);
-	padding: 3px;
-	/* box-shadow: 3px 3px 3px rgb(100, 100, 100); */
+	padding: 6px;
 }
 
 #board-back td {
 	box-sizing: border-box;
-	width: 50px;
-	height: 50px;
+	width: 60px;
+	height: 60px;
 	border-radius: 50%;
 	background-color: rgb(0, 0, 0);
-	/* border: solid 1px rgb(255, 255, 255); */
 }
 
 #board {
@@ -100,18 +140,18 @@ h2 {
 	margin: 0 auto;
 	background-color: rgba(0, 0, 0, 0);
 	border-radius: 1.5em;
-	border: 1px solid rgb(95, 95, 95);
-	padding: 3px;
+	padding: 6px;
 	/* box-shadow: 3px 3px 3px rgb(100, 100, 100); */
 }
 
 #board td {
 	box-sizing: border-box;
-	width: 50px;
-	height: 50px;
+	width: 60px;
+	height: 60px;
 	border-radius: 50%;
 	background-color: rgb(0, 0, 0, 0);
-	border: solid 1px rgb(255, 255, 255);
+	border: 1px solid rgb(255, 255, 255);
+	box-shadow: 1px 1px 0px black;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
@@ -138,11 +178,12 @@ h2 {
 #column-top-back td {
 	position: relative;
 	background-color: rgb(255, 255, 255);
-	border: 1px solid rgb(182, 182, 182);
 }
 
 #column-top td {
 	position: relative;
+	border: 1px inset rgb(255, 255, 255);
+	box-shadow: 0px 0px 0px black;
 }
 
 /* #column-top td:hover .hover-piece-p1 {
@@ -204,56 +245,50 @@ h2 {
 }
 
 .fall-r0 {
-	transition-duration: 0.3s;
 	position: relative;
 	animation-name: fall-animation-r0;
-	animation-duration: 2000ms;
+	animation-duration: 1000ms;
 	z-index: 2;
 }
 
 .fall-r1 {
-	transition-duration: 0.3s;
 	position: relative;
 	animation-name: fall-animation-r1;
-	animation-duration: 2000ms;
+	animation-duration: 1000ms;
 	z-index: 2;
 }
 
 .fall-r2 {
-	transition-duration: 0.3s;
 	position: relative;
 	animation-name: fall-animation-r2;
-	animation-duration: 2000ms;
+	animation-duration: 1000ms;
 	z-index: 2;
 }
 
 .fall-r3 {
-	transition-duration: 0.3s;
 	position: relative;
 	animation-name: fall-animation-r3;
-	animation-duration: 2000ms;
+	animation-duration: 1000ms;
 	z-index: 2;
 }
 
 .fall-r4 {
-	transition-duration: 0.3s;
 	position: relative;
 	animation-name: fall-animation-r4;
-	animation-duration: 2000ms;
+	animation-duration: 1000ms;
 	z-index: 2;
 }
 
 .fall-r5 {
-	transition-duration: 0.3s;
 	position: relative;
 	animation-name: fall-animation-r5;
-	animation-duration: 2000ms;
+	animation-duration: 1000ms;
 	z-index: 2;
 }
 
 @keyframes fall-animation-r0 {
 	from {
-		transform: translateY(-312px);
+		transform: translateY(-372px);
 	}
 	to {
 		transform: translateY(0);
@@ -262,7 +297,7 @@ h2 {
 
 @keyframes fall-animation-r1 {
 	from {
-		transform: translateY(-259px);
+		transform: translateY(-319px);
 	}
 	to {
 		transform: translateY(0);
@@ -270,7 +305,7 @@ h2 {
 }
 @keyframes fall-animation-r2 {
 	from {
-		transform: translateY(-208px);
+		transform: translateY(-268px);
 	}
 	to {
 		transform: translateY(0);
@@ -278,7 +313,7 @@ h2 {
 }
 @keyframes fall-animation-r3 {
 	from {
-		transform: translateY(-155px);
+		transform: translateY(-215px);
 	}
 	to {
 		transform: translateY(0);
@@ -286,7 +321,7 @@ h2 {
 }
 @keyframes fall-animation-r4 {
 	from {
-		transform: translateY(-102px);
+		transform: translateY(-162px);
 	}
 	to {
 		transform: translateY(0);
@@ -294,7 +329,7 @@ h2 {
 }
 @keyframes fall-animation-r5 {
 	from {
-		transform: translateY(-49px);
+		transform: translateY(-119px);
 	}
 	to {
 		transform: translateY(0);

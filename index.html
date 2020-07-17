@@ -8,23 +8,33 @@
 </head>
 <body>
     <div id="main-div">   
-        <div id="prev-score">
-            <h1>PREVIOUS SCORE:</h1>
-            <h2 class='player-title'>Player 1:</h2>
-            <h2 id='p1-high-score'></h2>
-            <h2 class='player-title'>Player 2:</h2>
-            <h2 id='p2-high-score'></h2>
-        </div>
         <div id="game">
             <h1>Connect 4!</h1>
             <!-- <table id="board"></table> -->
         </div>
-        <div id="current-score">
-            <h1>CURRENT SCORE:</h1>
-            <h2 class='player-title'>Player 1:</h2>
-            <h2 id='p1-prev-score'></h2>
-            <h2 class='player-title'>Player 2:</h2>
-            <h2 id='p2-prev-score'></h2>
+        <div id="score-panel">
+            <div id="high-score">
+                <h1>HIGH SCORE</h1>
+                <div class='black-box'>
+                    <div>
+                        <h2 class='p1-title'>Player 1</h2>
+                        <h2 class='p2-title'>Player 2</h2>
+                    </div>
+                    <h2 id='p1-high-score'>X</h2>
+                    <h2 id='p2-high-score'>X</h2>
+                </div>
+            </div>
+            <div id="curr-score">
+                <h1>CURRENT SCORE</h1>
+                <div class='black-box'>
+                    <div>
+                        <h2 class='p1-title'>Player 1</h2>
+                        <h2 class='p2-title'>Player 2</h2>
+                    </div>
+                    <h2 id='p1-curr-score'>X</h2>
+                    <h2 id='p2-curr-score'>X</h2>
+                </div>
+            </div>
         </div>
     </div>  
 <script src="connect4.js"></script>
