@@ -4,7 +4,6 @@
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
  */
-
 const WIDTH = 7;
 const HEIGHT = 6;
 
@@ -30,10 +29,28 @@ function makeBoard () {
 
 function makeHtmlBoard () {
 	// TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-	const htmlBoard = document.getElementById('board');
+	const htmlBoardWrapper = document.createElement('div');
+	htmlBoardWrapper.setAttribute('id', 'board-wrapper');
+	document.querySelector('#game').append(htmlBoardWrapper);
+
+	const htmlBoardBack = document.createElement('table');
+	htmlBoardBack.setAttribute('id', 'board-back');
+	htmlBoardWrapper.append(htmlBoardBack);
+
+	const htmlBoard = document.createElement('table');
+	htmlBoard.setAttribute('id', 'board');
+	htmlBoardWrapper.append(htmlBoard);
 	// TODO: add comment for this code
 	//Create a row, assign it to variable 'top', and then give it an ID of 'column-top'. We then add an eventListener to execute the 'handleClick' function when 'top' is clicked.
 	//Next, create WIDTH ammount of 'td' cells, give each an ID of 0 thru WIDTH - 1 in order of creation, and then append each one in order before the next is created - then we append the entire 'column-top' row to 'htmlBoard'.
+	const topBack = document.createElement('tr');
+	topBack.setAttribute('id', 'column-top-back');
+	for (let x = 0; x < WIDTH; x++) {
+		const headCell = document.createElement('td');
+		topBack.append(headCell);
+	}
+	htmlBoardBack.append(topBack);
+
 	const top = document.createElement('tr');
 	top.setAttribute('id', 'column-top');
 	top.addEventListener('click', handleClick);
@@ -52,14 +69,28 @@ function makeHtmlBoard () {
 	// TODO: add comment for this code
 	//Create HEIGHT amount of 'tr' rows (each one declared with the varaible name 'row') by using a for loop with 'y' being the incrementing variable.  For each row, create WIDTH amount of 'td' cells (each one declared with the variable name 'cell') by using a nested for loop with 'x' being the incrememnting variable. Give each cell the unique ID of 'y-x' and append each cell to the corresponding row. Append each 'row' to 'htmlBoard' at the end of each iteration of the parent for loop.
 	for (let y = HEIGHT - 1; y >= 0; y--) {
+		const rowBack = document.createElement('tr');
+		for (let x = 0; x < WIDTH; x++) {
+			const cellBack = document.createElement('td');
+			rowBack.append(cellBack);
+		}
+		htmlBoardBack.append(rowBack);
+	}
+
+	for (let y = HEIGHT - 1; y >= 0; y--) {
 		const row = document.createElement('tr');
 		for (let x = 0; x < WIDTH; x++) {
 			const cell = document.createElement('td');
 			cell.setAttribute('id', `${y}-${x}`);
+			const cellWrap = document.createElement('div');
+			cellWrap.classList.add('cell-wrapper');
+			cell.append(cellWrap);
 			row.append(cell);
 		}
 		htmlBoard.append(row);
 	}
+	// const backLayer = document.createElement('div');
+	// htmlBoard.append(backLayer);
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
@@ -84,10 +115,13 @@ function placeInTable (y, x) {
 		className = 'p2';
 	}
 	const piece = document.createElement('div');
-	piece.classList.add('piece', className);
+	piece.classList.add('piece', className, `fall-r${y}`);
+
+	const topX = document.getElementById(`${x + 7}`);
+	topX.append(piece);
 
 	const pieceCell = document.getElementById(`${y}-${x}`);
-	pieceCell.append(piece);
+	pieceCell.querySelector('.cell-wrapper').append(piece);
 }
 
 /** endGame: announce game end */
@@ -96,7 +130,7 @@ function endGame (msg) {
 	// TODO: pop up alert message
 	setTimeout(() => {
 		alert(msg);
-	}, 0);
+	}, 200);
 }
 
 /** handleClick: handle click of column top to play piece */

@@ -2,15 +2,31 @@
 <head>
   <title>Connect 4</title>
   <link href="connect4.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;600&family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<div id="game">
-  <table id="board"></table>
-</div>
-
-<!-- <div id="hover-piece" class="piece"></div> -->
-
+    <div id="main-div">   
+        <div id="prev-score">
+            <h1>PREVIOUS SCORE:</h1>
+            <h2 class='player-title'>Player 1:</h2>
+            <h2 id='p1-high-score'></h2>
+            <h2 class='player-title'>Player 2:</h2>
+            <h2 id='p2-high-score'></h2>
+        </div>
+        <div id="game">
+            <h1>Connect 4!</h1>
+            <!-- <table id="board"></table> -->
+        </div>
+        <div id="current-score">
+            <h1>CURRENT SCORE:</h1>
+            <h2 class='player-title'>Player 1:</h2>
+            <h2 id='p1-prev-score'></h2>
+            <h2 class='player-title'>Player 2:</h2>
+            <h2 id='p2-prev-score'></h2>
+        </div>
+    </div>  
 <script src="connect4.js"></script>
 
 </body>
