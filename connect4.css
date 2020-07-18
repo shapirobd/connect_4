@@ -33,7 +33,7 @@ body {
 }
 
 #high-score {
-	background-color: rgba(225, 225, 225, 0.4);
+	background-color: rgba(58, 137, 177, 0.3);
 	position: relative;
 	display: block;
 	margin: 25px auto;
@@ -48,7 +48,7 @@ body {
 }
 
 #curr-score {
-	background-color: rgba(225, 225, 225, 0.4);
+	background-color: rgba(58, 137, 177, 0.3);
 	position: relative;
 	display: block;
 	margin: 25px auto;
@@ -67,7 +67,7 @@ body {
 	height: fit-content;
 	transform: translateY(-5px);
 	text-align: center;
-	font-family: 'Hind', sans-serif;
+	font-family: 'Quantico', sans-serif;
 	margin: 5px 0 10px 0;
 }
 
