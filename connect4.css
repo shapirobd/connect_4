@@ -169,7 +169,7 @@ h2 {
 
 #reset:hover {
 	transition-duration: 0.3s;
-	background-color: white;
+	background-image: linear-gradient(to bottom, white, gray);
 	color: black;
 	border: 3px solid limegreen;
 }
@@ -320,7 +320,7 @@ h2 {
 	position: relative;
 	animation-name: fall-animation-r0;
 	animation-duration: 300ms;
-	animation-timing-function: linear;
+	animation-timing-function: , gray;
 	z-index: 2;
 }
 
@@ -328,7 +328,7 @@ h2 {
 	position: relative;
 	animation-name: fall-animation-r1;
 	animation-duration: 270ms;
-	animation-timing-function: linear;
+	animation-timing-function: , gray;
 	z-index: 2;
 }
 
@@ -336,7 +336,7 @@ h2 {
 	position: relative;
 	animation-name: fall-animation-r2;
 	animation-duration: 240ms;
-	animation-timing-function: linear;
+	animation-timing-function: , gray;
 	z-index: 2;
 }
 
@@ -344,7 +344,7 @@ h2 {
 	position: relative;
 	animation-name: fall-animation-r3;
 	animation-duration: 210ms;
-	animation-timing-function: linear;
+	animation-timing-function: , gray;
 	z-index: 2;
 }
 
@@ -352,7 +352,7 @@ h2 {
 	position: relative;
 	animation-name: fall-animation-r4;
 	animation-duration: 180ms;
-	animation-timing-function: linear;
+	animation-timing-function: , gray;
 	z-index: 2;
 }
 
@@ -360,7 +360,7 @@ h2 {
 	position: relative;
 	animation-name: fall-animation-r5;
 	animation-duration: 150ms;
-	animation-timing-function: linear;
+	animation-timing-function: , gray;
 	z-index: 2;
 }
 

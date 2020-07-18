@@ -14,6 +14,8 @@ let p1Score = 0;
 let p2Score = 0;
 let hasListener;
 
+const dingSound = new sound('https://freesound.org/data/previews/335/335908_5865517-lq.mp3');
+const winSound = new sound('https://freesound.org/data/previews/274/274177_5123851-lq.mp3');
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -34,6 +36,7 @@ function makeBoard () {
 function updateScore (player, score) {
 	localStorage.setItem(`p${player}CurrScore`, `${score}`);
 	document.querySelector(`#p${player}-curr-score`).textContent = score;
+	dingSound.play();
 }
 
 function loadHighScores () {
@@ -151,21 +154,6 @@ function placeInTable (y, x) {
 
 function endGame (msg) {
 	// TODO: pop up alert message
-	if (currPlayer === 1) {
-		document.querySelector('#p1-curr-score').style.color = 'limegreen';
-		if (localStorage.getItem('p1HighScore') > p1Score || localStorage.getItem('p1HighScore') === '0') {
-			localStorage.setItem('p1HighScore', p1Score);
-			document.querySelector('#p1-high-score').textContent = p1Score;
-			document.querySelector('#p1-high-score').style.color = 'limegreen';
-		}
-	} else if (currPlayer === 2) {
-		document.querySelector('#p2-curr-score').style.color = 'limegreen';
-		if (localStorage.getItem('p2HighScore') > p2Score || localStorage.getItem('p2HighScore') === '0') {
-			localStorage.setItem('p2HighScore', p2Score);
-			document.querySelector('#p2-high-score').textContent = p2Score;
-			document.querySelector('#p2-high-score').style.color = 'limegreen';
-		}
-	}
 	setTimeout(() => {
 		alert(msg);
 	}, 300);
@@ -195,12 +183,22 @@ function handleClick (evt) {
 
 	if (currPlayer === 1) {
 		p1Score++;
-		updateScore(currPlayer, p1Score);
-		console.log(p1Score);
+		for (let i = 0; i < HEIGHT; i++) {
+			if (y === i) {
+				setTimeout(() => {
+					updateScore(currPlayer, p1Score);
+				}, 300 - 30 * i);
+			}
+		}
 	} else {
 		p2Score++;
-		updateScore(currPlayer, p2Score);
-		console.log(p2Score);
+		for (let i = 0; i < HEIGHT; i++) {
+			if (y === i) {
+				setTimeout(() => {
+					updateScore(currPlayer, p2Score);
+				}, 300 - 30 * i);
+			}
+		}
 	}
 
 	// check for win
@@ -212,6 +210,35 @@ function handleClick (evt) {
 			return div.removeEventListener('click', handleClick);
 		});
 		hasListener = false;
+
+		for (let i = 0; i < HEIGHT; i++) {
+			if (y === i) {
+				setTimeout(() => {
+					winSound.play();
+				}, 300 - 30 * i);
+			}
+		}
+		for (let i = 0; i < HEIGHT; i++) {
+			if (currPlayer === 1) {
+				setTimeout(() => {
+					document.querySelector('#p1-curr-score').style.color = 'limegreen';
+					document.querySelector('#p1-high-score').style.color = 'limegreen';
+					if (localStorage.getItem('p1HighScore') > p1Score || localStorage.getItem('p1HighScore') === '0') {
+						localStorage.setItem('p1HighScore', p1Score);
+						document.querySelector('#p1-high-score').textContent = p1Score;
+					}
+				}, 300 - 30 * 1);
+			} else if (currPlayer === 2) {
+				setTimeout(() => {
+					document.querySelector('#p2-curr-score').style.color = 'limegreen';
+					document.querySelector('#p2-high-score').style.color = 'limegreen';
+					if (localStorage.getItem('p2HighScore') > p2Score || localStorage.getItem('p2HighScore') === '0') {
+						localStorage.setItem('p2HighScore', p2Score);
+						document.querySelector('#p2-high-score').textContent = p2Score;
+					}
+				}, 300 - 30 * 1);
+			}
+		}
 		return endGame(`Player ${currPlayer} won!`);
 	}
 
@@ -306,6 +333,21 @@ resetBtn.addEventListener('click', (e) => {
 	document.querySelector('#p1-high-score').style.color = 'rgb(255, 49, 49)';
 	document.querySelector('#p2-high-score').style.color = 'rgb(38, 38, 255)';
 });
+
+function sound (src) {
+	this.sound = document.createElement('audio');
+	this.sound.src = src;
+	this.sound.setAttribute('preload', 'auto');
+	this.sound.setAttribute('controls', 'none');
+	this.sound.style.display = 'none';
+	document.body.appendChild(this.sound);
+	this.play = function () {
+		this.sound.play();
+	};
+	this.stop = function () {
+		this.sound.pause();
+	};
+}
 
 makeBoard();
 makeHtmlBoard();
