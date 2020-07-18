@@ -63,6 +63,7 @@ body {
 }
 
 #score-panel h1 {
+	color: white;
 	font-size: 30pt;
 	height: fit-content;
 	transform: translateY(-5px);
