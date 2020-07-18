@@ -222,19 +222,19 @@ function handleClick (evt) {
 			if (currPlayer === 1) {
 				setTimeout(() => {
 					document.querySelector('#p1-curr-score').style.color = 'limegreen';
-					document.querySelector('#p1-high-score').style.color = 'limegreen';
 					if (localStorage.getItem('p1HighScore') > p1Score || localStorage.getItem('p1HighScore') === '0') {
 						localStorage.setItem('p1HighScore', p1Score);
 						document.querySelector('#p1-high-score').textContent = p1Score;
+						document.querySelector('#p1-high-score').style.color = 'limegreen';
 					}
 				}, 300 - 30 * 1);
 			} else if (currPlayer === 2) {
 				setTimeout(() => {
 					document.querySelector('#p2-curr-score').style.color = 'limegreen';
-					document.querySelector('#p2-high-score').style.color = 'limegreen';
 					if (localStorage.getItem('p2HighScore') > p2Score || localStorage.getItem('p2HighScore') === '0') {
 						localStorage.setItem('p2HighScore', p2Score);
 						document.querySelector('#p2-high-score').textContent = p2Score;
+						document.querySelector('#p2-high-score').style.color = 'limegreen';
 					}
 				}, 300 - 30 * 1);
 			}
@@ -298,8 +298,15 @@ function checkForWin () {
 }
 
 let resetBtn = document.querySelector('#reset');
-resetBtn.addEventListener('click', (e) => {
+let resetSection = document.querySelector('#reset-section');
+resetSection.addEventListener('click', (e) => {
 	e.preventDefault();
+	console.log(e.target);
+	if (e.target.id === 'memory') {
+		localStorage.clear();
+		document.querySelector('#p1-high-score').innerText = '';
+		document.querySelector('#p2-high-score').innerText = '';
+	}
 	localStorage.setItem('p1CurrScore', '0');
 	localStorage.setItem('p2CurrScore', '0');
 	p1Score = 0;
