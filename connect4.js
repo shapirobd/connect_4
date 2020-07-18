@@ -222,6 +222,8 @@ function handleClick (evt) {
 			if (currPlayer === 1) {
 				setTimeout(() => {
 					document.querySelector('#p1-curr-score').style.color = 'limegreen';
+					document.querySelector('#score-panel').style.backgroundImage =
+						'linear-gradient(to bottom left, rgba(255, 49, 49), black)';
 					if (localStorage.getItem('p1HighScore') > p1Score || localStorage.getItem('p1HighScore') === '0') {
 						localStorage.setItem('p1HighScore', p1Score);
 						document.querySelector('#p1-high-score').textContent = p1Score;
@@ -231,6 +233,8 @@ function handleClick (evt) {
 			} else if (currPlayer === 2) {
 				setTimeout(() => {
 					document.querySelector('#p2-curr-score').style.color = 'limegreen';
+					document.querySelector('#score-panel').style.backgroundImage =
+						'linear-gradient(to bottom left, black, rgba(38, 38, 255)';
 					if (localStorage.getItem('p2HighScore') > p2Score || localStorage.getItem('p2HighScore') === '0') {
 						localStorage.setItem('p2HighScore', p2Score);
 						document.querySelector('#p2-high-score').textContent = p2Score;
@@ -301,7 +305,6 @@ let resetBtn = document.querySelector('#reset');
 let resetSection = document.querySelector('#reset-section');
 resetSection.addEventListener('click', (e) => {
 	e.preventDefault();
-	console.log(e.target);
 	if (e.target.id === 'memory') {
 		localStorage.clear();
 		document.querySelector('#p1-high-score').innerText = '';
@@ -339,6 +342,8 @@ resetSection.addEventListener('click', (e) => {
 	document.querySelector('#p2-curr-score').style.color = 'white';
 	document.querySelector('#p1-high-score').style.color = 'rgb(255, 49, 49)';
 	document.querySelector('#p2-high-score').style.color = 'rgb(38, 38, 255)';
+	document.querySelector('#score-panel').style.backgroundImage =
+		'linear-gradient(to bottom left, rgb(255, 49, 49), rgb(38, 38, 255))';
 });
 
 function sound (src) {
