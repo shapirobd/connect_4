@@ -12,6 +12,7 @@ const board = []; // array of rows, each row is array of cells  (board[y][x])
 
 let p1Score = 0;
 let p2Score = 0;
+let hasListener;
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -75,6 +76,7 @@ function makeHtmlBoard () {
 	const top = document.createElement('tr');
 	top.setAttribute('id', 'column-top');
 	top.addEventListener('click', handleClick);
+	hasListener = true;
 	let topCircle;
 	for (let x = 0; x < WIDTH; x++) {
 		const headCell = document.createElement('td');
@@ -209,6 +211,7 @@ function handleClick (evt) {
 		topRowArr.map((div) => {
 			return div.removeEventListener('click', handleClick);
 		});
+		hasListener = false;
 		return endGame(`Player ${currPlayer} won!`);
 	}
 
@@ -266,6 +269,39 @@ function checkForWin () {
 		}
 	}
 }
+
+let resetBtn = document.querySelector('#reset');
+resetBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	localStorage.setItem('p1CurrScore', '0');
+	localStorage.setItem('p2CurrScore', '0');
+	p1Score = 0;
+	p2Score = 0;
+	let allPieces = Array.from(document.querySelectorAll('.piece'));
+	for (let piece of allPieces) {
+		piece.remove();
+	}
+	document.querySelector('#p1-curr-score').innerText = '';
+	document.querySelector('#p2-curr-score').innerText = '';
+	for (i = 0; i < board.length; i++) {
+		for (j = 0; j < board[i].length; j++) {
+			board[i][j] = 'null';
+		}
+	}
+	loadHighScores();
+	if (hasListener === false) {
+		const topRow = document.getElementById('column-top');
+		topRow.addEventListener('click', handleClick);
+		const topRowArr = Array.from(topRow.querySelectorAll('td div'));
+	}
+	hasListener = true;
+	currPlayer = 1;
+	for (let x = 0; x < WIDTH; x++) {
+		const headCell = document.getElementById(`${x}`);
+		const topCircle = headCell.querySelector('div');
+		topCircle.className = 'hover-piece-p1';
+	}
+});
 
 makeBoard();
 makeHtmlBoard();
