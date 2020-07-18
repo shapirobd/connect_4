@@ -301,6 +301,10 @@ resetBtn.addEventListener('click', (e) => {
 		const topCircle = headCell.querySelector('div');
 		topCircle.className = 'hover-piece-p1';
 	}
+	document.querySelector('#p1-curr-score').style.color = 'white';
+	document.querySelector('#p2-curr-score').style.color = 'white';
+	document.querySelector('#p1-high-score').style.color = 'rgb(255, 49, 49)';
+	document.querySelector('#p2-high-score').style.color = 'rgb(38, 38, 255)';
 });
 
 makeBoard();
