@@ -10,6 +10,9 @@ const HEIGHT = 6;
 let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
 
+let p1Score = 0;
+let p2Score = 0;
+
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -26,6 +29,24 @@ function makeBoard () {
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
+
+function updateScore (player, score) {
+	localStorage.setItem(`p${player}CurrScore`, `${score}`);
+	document.querySelector(`#p${player}-curr-score`).textContent = score;
+}
+
+function loadHighScores () {
+	if (localStorage.getItem('p1HighScore') === null || localStorage.getItem('p2HighScore') === null) {
+		localStorage.setItem('p1HighScore', '0');
+		localStorage.setItem('p2HighScore', '0');
+	}
+	if (localStorage.getItem('p1HighScore') !== '0') {
+		document.querySelector('#p1-high-score').textContent = localStorage.getItem('p1HighScore');
+	}
+	if (localStorage.getItem('p2HighScore') !== '0') {
+		document.querySelector('#p2-high-score').textContent = localStorage.getItem('p2HighScore');
+	}
+}
 
 function makeHtmlBoard () {
 	// TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
@@ -128,9 +149,24 @@ function placeInTable (y, x) {
 
 function endGame (msg) {
 	// TODO: pop up alert message
+	if (currPlayer === 1) {
+		document.querySelector('#p1-curr-score').style.color = 'limegreen';
+		if (localStorage.getItem('p1HighScore') > p1Score || localStorage.getItem('p1HighScore') === '0') {
+			localStorage.setItem('p1HighScore', p1Score);
+			document.querySelector('#p1-high-score').textContent = p1Score;
+			document.querySelector('#p1-high-score').style.color = 'limegreen';
+		}
+	} else if (currPlayer === 2) {
+		document.querySelector('#p2-curr-score').style.color = 'limegreen';
+		if (localStorage.getItem('p2HighScore') > p2Score || localStorage.getItem('p2HighScore') === '0') {
+			localStorage.setItem('p2HighScore', p2Score);
+			document.querySelector('#p2-high-score').textContent = p2Score;
+			document.querySelector('#p2-high-score').style.color = 'limegreen';
+		}
+	}
 	setTimeout(() => {
 		alert(msg);
-	}, 200);
+	}, 300);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -154,6 +190,16 @@ function handleClick (evt) {
 	// TODO: add line to update in-memory board
 	board[y][x] = currPlayer;
 	placeInTable(y, x);
+
+	if (currPlayer === 1) {
+		p1Score++;
+		updateScore(currPlayer, p1Score);
+		console.log(p1Score);
+	} else {
+		p2Score++;
+		updateScore(currPlayer, p2Score);
+		console.log(p2Score);
+	}
 
 	// check for win
 	if (checkForWin()) {
@@ -223,3 +269,4 @@ function checkForWin () {
 
 makeBoard();
 makeHtmlBoard();
+loadHighScores();

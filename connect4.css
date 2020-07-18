@@ -17,10 +17,10 @@ body {
 #game {
 	position: absolute;
 	left: 0px;
-	background-color: white;
+	background-image: url('https://steamuserimages-a.akamaihd.net/ugc/772777980563983447/CAD2C3FDCF426DF9D4C794AA16480E00561A6587/');
+	background-size: cover;
 	width: 60%;
 	height: 100%;
-	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 #score-panel {
@@ -28,7 +28,7 @@ body {
 	right: 0px;
 	width: 40%;
 	height: 100%;
-	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+	box-shadow: -6px -6px 5px rgba(0, 0, 0, 0.5);
 }
 
 #high-score {
@@ -69,6 +69,7 @@ h1 {
 }
 
 #game h1 {
+	color: white;
 	font-size: 50pt;
 	text-align: center;
 	font-family: 'Lobster', cursive;
@@ -83,11 +84,11 @@ h2 {
 }
 
 .p1-title {
-	color: rgb(255, 92, 92);
+	color: rgb(255, 49, 49);
 }
 
 .p2-title {
-	color: rgb(100, 100, 255);
+	color: rgb(38, 38, 255);
 }
 
 .black-box {
@@ -102,8 +103,41 @@ h2 {
 	border: 8px inset white;
 }
 
-.black-box h2 {
-	margin: 15px 40px;
+.p1-half {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	left: 0px;
+}
+
+.p2-half {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	right: 0px;
+}
+
+.score {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: -32%;
+	display: block;
+	color: white;
+	font-size: 50pt;
+	font-weight: bold;
+}
+
+.score::content {
+	transition-duration: 0.5s;
+}
+
+#p1-high-score {
+	color: rgb(255, 49, 49);
+}
+
+#p2-high-score {
+	color: rgb(38, 38, 255);
 }
 
 #board-wrapper {
@@ -237,7 +271,6 @@ h2 {
 
 .cell-wrapper {
 	transition-duration: .5s;
-
 	box-sizing: border-box;
 	width: 100%;
 	height: 100%;
@@ -247,43 +280,58 @@ h2 {
 .fall-r0 {
 	position: relative;
 	animation-name: fall-animation-r0;
-	animation-duration: 1000ms;
+	animation-duration: 300ms;
+	animation-timing-function: linear;
 	z-index: 2;
 }
 
 .fall-r1 {
 	position: relative;
 	animation-name: fall-animation-r1;
-	animation-duration: 1000ms;
+	animation-duration: 270ms;
+	animation-timing-function: linear;
 	z-index: 2;
 }
 
 .fall-r2 {
 	position: relative;
 	animation-name: fall-animation-r2;
-	animation-duration: 1000ms;
+	animation-duration: 240ms;
+	animation-timing-function: linear;
 	z-index: 2;
 }
 
 .fall-r3 {
 	position: relative;
 	animation-name: fall-animation-r3;
-	animation-duration: 1000ms;
+	animation-duration: 210ms;
+	animation-timing-function: linear;
 	z-index: 2;
 }
 
 .fall-r4 {
 	position: relative;
 	animation-name: fall-animation-r4;
-	animation-duration: 1000ms;
+	animation-duration: 180ms;
+	animation-timing-function: linear;
 	z-index: 2;
 }
 
 .fall-r5 {
 	position: relative;
 	animation-name: fall-animation-r5;
-	animation-duration: 1000ms;
+	animation-duration: 150ms;
+	animation-timing-function: linear;
 	z-index: 2;
+}
+
+@keyframes fall-animation-bounce {
+	from {
+		transform: translateY(-15px);
+	}
+	to {
+		transform: translateY(0);
+	}
 }
 
 @keyframes fall-animation-r0 {
@@ -297,7 +345,7 @@ h2 {
 
 @keyframes fall-animation-r1 {
 	from {
-		transform: translateY(-319px);
+		transform: translateY(-307px);
 	}
 	to {
 		transform: translateY(0);
@@ -305,7 +353,7 @@ h2 {
 }
 @keyframes fall-animation-r2 {
 	from {
-		transform: translateY(-268px);
+		transform: translateY(-246px);
 	}
 	to {
 		transform: translateY(0);
@@ -313,7 +361,7 @@ h2 {
 }
 @keyframes fall-animation-r3 {
 	from {
-		transform: translateY(-215px);
+		transform: translateY(-184px);
 	}
 	to {
 		transform: translateY(0);
@@ -321,7 +369,7 @@ h2 {
 }
 @keyframes fall-animation-r4 {
 	from {
-		transform: translateY(-162px);
+		transform: translateY(-122px);
 	}
 	to {
 		transform: translateY(0);
@@ -329,7 +377,7 @@ h2 {
 }
 @keyframes fall-animation-r5 {
 	from {
-		transform: translateY(-119px);
+		transform: translateY(-59px);
 	}
 	to {
 		transform: translateY(0);
