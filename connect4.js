@@ -37,6 +37,14 @@ function updateScore (player, score) {
 	localStorage.setItem(`p${player}CurrScore`, `${score}`);
 	document.querySelector(`#p${player}-curr-score`).textContent = score;
 	dingSound.play();
+	// switch players
+	// TODO: switch currPlayer 1 <-> 2
+	currPlayer === 1 ? (currPlayer = 2) : (currPlayer = 1);
+	const topRow = document.getElementById('column-top');
+	const topRowArr = Array.from(topRow.querySelectorAll('td div'));
+	topRowArr.map((div) => {
+		div.className = `hover-piece-p${currPlayer}`;
+	});
 }
 
 function loadHighScores () {
@@ -256,15 +264,6 @@ function handleClick (evt) {
 	if (isTie) {
 		endGame("It's a tie!");
 	}
-	// switch players
-	// TODO: switch currPlayer 1 <-> 2
-	currPlayer === 1 ? (currPlayer = 2) : (currPlayer = 1);
-
-	const topRow = document.getElementById('column-top');
-	const topRowArr = Array.from(topRow.querySelectorAll('td div'));
-	topRowArr.map((div) => {
-		div.className = `hover-piece-p${currPlayer}`;
-	});
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
